@@ -1,11 +1,11 @@
 import sys
 import os
+import json
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QUrl, QDir, QObject, Signal, Slot
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWebEngineCore import QWebEngineSettings
 from PySide6.QtWebChannel import QWebChannel
-
 
 class Comm(QObject):
     logAck = Signal(str)
@@ -15,9 +15,9 @@ class Comm(QObject):
 
     @Slot(str)
     def log(self, message):
-        print(message)
+        data = json.loads(message)
+        print(type(data))
         self.logAck.emit('Ok Vue !')
-
 
 class MainWindow(QMainWindow):
     def __init__(self, debug=False, parent=None):
@@ -45,7 +45,6 @@ class MainWindow(QMainWindow):
             url = 'file:///' + QDir.fromNativeSeparators(
                 os.path.abspath(os.path.join(os.path.dirname(__file__), './frontend/dist/index.html')))
             self.view.load(QUrl(url))
-
 
 if __name__ == "__main__":
     app = QApplication([])

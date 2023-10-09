@@ -18,12 +18,21 @@ onMounted(async () => {
   channelInterface.logAck.connect(str => {
     logAckMsg.value = str;
   });
-  channelInterface.log("Hello world");
   channel = channelInterface;
 });
 
+  // 创建一个对象
+  let person = {
+    name: "Bob",
+    age: 30,
+    city: "New York"
+  };
+
 function sendMessage() {
-  channel.log("Hello world");
+  // 使用JSON.stringify()方法将对象转换为JSON字符串
+  let jsonString = JSON.stringify(person);
+  channel.log(jsonString);
+
   // window.pywebchannel.receiveMessageFromVue("Hello from Vue.js!");
 }
 </script>
