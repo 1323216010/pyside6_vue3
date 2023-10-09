@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Welcome to PDF WorkToolBox App</h1>
+    <h1>WorkToolBox App</h1>
     <button @click="sendMessage">Send Message to Python</button>
     <div id="app">{{ logAckMsg }}</div>
   </div>
