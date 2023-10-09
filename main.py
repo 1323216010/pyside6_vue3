@@ -49,7 +49,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication([])
-    window = MainWindow(False)
+    window = MainWindow(True)
     window.resize(1000, 800)
     window.show()
     sys.exit(app.exec())
