@@ -3,6 +3,7 @@
     <h1>WorkToolBox App</h1>
     <button @click="sendMessage">Send Message to Python</button>
     <div id="app">{{ logAckMsg }}</div>
+    <div id="anotherDiv">{{ anotherMsg }}</div>  <!-- 新增的显示区域 -->
   </div>
 </template>
 
@@ -11,12 +12,16 @@ import { ref, onMounted } from 'vue'
 import getInterface from "../js/channel";
 
 const logAckMsg = ref('');
+const anotherMsg = ref('');  // 新增的响应变量
 var channel;
 
 onMounted(async () => {
   const channelInterface = await getInterface;
   channelInterface.logAck.connect(str => {
     logAckMsg.value = str;
+  });
+  channelInterface.anotherSignal.connect(str => {  // 新增的连接
+    anotherMsg.value = str;
   });
   channel = channelInterface;
 });
